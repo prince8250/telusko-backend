@@ -1,0 +1,26 @@
+package com.teluskoBackend.demo.Controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.teluskoBackend.demo.DTOs.ResponseDTOs.ProductResponseDTO;
+import com.teluskoBackend.demo.Service.ProductService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api")
+public class ProductController {
+
+    private final ProductService service;
+
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductResponseDTO>> getAllProducts(){
+        return ResponseEntity.ok().body(service.getAllProducts());
+    }
+}
