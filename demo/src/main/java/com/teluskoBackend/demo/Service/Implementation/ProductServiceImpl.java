@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.teluskoBackend.demo.DTOs.RequestDTOs.CreateProductDTO;
+import com.teluskoBackend.demo.DTOs.RequestDTOs.UpdateProductDTO;
 import com.teluskoBackend.demo.DTOs.ResponseDTOs.ProductResponseDTO;
 import com.teluskoBackend.demo.Exceptions.AlreadyExistsException;
 import com.teluskoBackend.demo.Exceptions.ResourceNotFoundException;
@@ -13,6 +14,7 @@ import com.teluskoBackend.demo.Model.Product;
 import com.teluskoBackend.demo.Repository.ProductRepo;
 import com.teluskoBackend.demo.Service.ProductService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -44,6 +46,18 @@ public class ProductServiceImpl implements ProductService {
             throw new AlreadyExistsException("This product ID already exists.");
         }
         repo.save(product);
+    }
+
+    @Override
+    @Transactional
+    public void updateProduct(Integer prodId, UpdateProductDTO updateDTO) {
+
+       Product product = repo.findById(prodId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+
+        mapper.UpdateProductFromDTO(updateDTO, product);
+
     }
 
 

@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teluskoBackend.demo.DTOs.RequestDTOs.CreateProductDTO;
+import com.teluskoBackend.demo.DTOs.RequestDTOs.UpdateProductDTO;
 import com.teluskoBackend.demo.DTOs.ResponseDTOs.ProductResponseDTO;
 import com.teluskoBackend.demo.Service.ProductService;
 
@@ -36,6 +38,12 @@ public class ProductController {
     @PostMapping("/products/save")
     public ResponseEntity<Void> addProduct(@RequestBody CreateProductDTO createProductDTO){
         service.addProduct(createProductDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/products/{prodId}")
+    public ResponseEntity<Void> updateProduct(@PathVariable Integer prodId, @RequestBody UpdateProductDTO updateDTO){
+        service.updateProduct(prodId, updateDTO);
         return ResponseEntity.ok().build();
     }
 }
