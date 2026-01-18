@@ -3,6 +3,7 @@ package com.teluskoBackend.demo.Controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,12 @@ public class ProductController {
     @PutMapping("/products/{prodId}")
     public ResponseEntity<Void> updateProduct(@PathVariable Integer prodId, @RequestBody UpdateProductDTO updateDTO){
         service.updateProduct(prodId, updateDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/products/{prodId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer prodId){
+        service.deleteById(prodId);
         return ResponseEntity.ok().build();
     }
 }

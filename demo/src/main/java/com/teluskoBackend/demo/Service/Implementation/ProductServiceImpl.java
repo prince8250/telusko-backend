@@ -57,10 +57,17 @@ public class ProductServiceImpl implements ProductService {
 
 
         mapper.UpdateProductFromDTO(updateDTO, product);
-
     }
 
+    @Override
+    public void deleteById(Integer prodId) {
+        Product product = repo.findById(prodId)
+            .orElseThrow(() -> new ResourceNotFoundException("Product not found."));
 
+        repo.delete(product);
+    }
+
+    
 
     
 }

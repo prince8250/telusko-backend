@@ -16,4 +16,6 @@ public interface ProductService {
     void addProduct(CreateProductDTO createProductDTO);
 
     void updateProduct(Integer prodId, UpdateProductDTO updateDTO);
+
+    void deleteById(Integer prodId);
 }
